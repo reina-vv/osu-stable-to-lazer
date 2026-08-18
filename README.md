@@ -12,13 +12,13 @@ model, and file store, and requests NTFS hard links for imported files.
 Close osu!lazer completely, back up its data directory, then run:
 
 ```powershell
-.\osu-stable-to-lazer.exe "C:\Data\osu\123 Artist - Title"
+.\osu-stable-to-lazer.exe "C:\Users\<username>\AppData\Local\osu!\Songs\123 Artist - Title"
 ```
 
 If automatic data-directory discovery is unsuitable, specify it explicitly:
 
 ```powershell
-.\osu-stable-to-lazer.exe "C:\Data\osu\123 Artist - Title" --lazer-data "D:\osu-data"
+.\osu-stable-to-lazer.exe "C:\Users\<username>\AppData\Local\osu!\Songs\123 Artist - Title" --lazer-data "C:\Users\<username>\AppData\Roaming\osu"
 ```
 
 The source and lazer data directories must be on the same writable NTFS volume.
