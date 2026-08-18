@@ -1,5 +1,5 @@
-// Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
-// See the LICENCE file in the repository root for full licence text.
+﻿// Copyright (c) 2026 osu-stable-to-lazer contributors. Licensed under the MIT License.
+// See the LICENSE file in the repository root for full license text.
 
 using System;
 using System.Diagnostics;
@@ -175,3 +175,4 @@ internal static class Program
         Console.Error.WriteLine("Usage: osu-stable-to-lazer.exe <stable beatmap set folder> [--lazer-data <lazer data folder>]");
     }
 }
+
