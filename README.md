@@ -1,4 +1,4 @@
-﻿# stable-to-lazer importer
+# stable-to-lazer importer
 
 A Windows command-line tool that imports one osu!stable beatmap-set folder into
 an existing osu!lazer data directory. It reuses lazer's beatmap parser, Realm
@@ -34,9 +34,21 @@ The dependency versions are deliberately pinned. Update all `ppy.osu.Game*`
 packages together and validate against the corresponding lazer release before
 using a new version with real user data.
 
+## Distribution
+
+This repository distributes source code only. It does not distribute compiled
+executables, `dotnet publish` output, or restored NuGet runtime packages. Build
+the tool locally; NuGet retrieves its dependencies during restore.
+
+Do not redistribute compiled output or use it commercially without independently
+reviewing every dependency's licence terms. In particular, lazer game resources
+have separate non-commercial and font licence requirements; see the third-party
+notices below.
+
 ## Licensing and trademarks
 
-This repository is licensed under the [MIT License](LICENSE). See
-[third-party notices](THIRD_PARTY_NOTICES.md) for osu!lazer package attribution
-and dependency obligations. `osu!`, `osu`, `lazer`, and ppy branding belong to
-ppy Pty Ltd; this repository is not an official project.
+The project-authored source code is licensed under the [MIT License](LICENSE).
+That licence does not grant rights to third-party packages or assets. See
+[third-party notices](THIRD_PARTY_NOTICES.md) for osu!lazer attribution and
+dependency obligations. `osu!`, `osu`, `lazer`, and ppy branding belong to ppy
+Pty Ltd; this repository is not an official project.
