@@ -11,6 +11,14 @@ osu!stableに取り込まれたmapsetを、osu!lazerに同時にハードリン�
 
 各自でビルドを行ってください。
 
+## ビルド環境
+
+- Windows 10 以降
+- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+- NuGet package を restore するためのインターネット接続
+- `watch.ps1` を使う場合は Windows PowerShell 5.1 以降または PowerShell 7
+
+`dotnet --info` で .NET 8 SDK が表示されることを確認してください。
 ## ビルド
 
 ```powershell
