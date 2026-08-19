@@ -40,7 +40,7 @@ lazerのインストール位置を変更している場合は、明示的に指
 
 1. `dotnet build -c Release -warnaserror` を実行します。
 2. `watch.ps1` の `$SongsPath` を自分の stable `Songs` フォルダへ変更します。
-3. lazer を完全に終了した状態で、`watch.ps1`を`osu-stable-to-lazer.exe`と同一のディレクトリに配置し、実行します。
+3. lazer を完全に終了した状態で`watch.ps1`を、ビルドした`osu-stable-to-lazer.exe`と同一のディレクトリに配置し、実行します。
 
 ```powershell
 .\watch.ps1
