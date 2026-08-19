@@ -1,54 +1,53 @@
 # stable-to-lazer importer
 
-A Windows command-line tool that imports one osu!stable beatmap-set folder into
-an existing osu!lazer data directory. It reuses lazer's beatmap parser, Realm
-model, and file store, and requests NTFS hard links for imported files.
+osu!stable の単一 beatmap set フォルダを、既存の osu!lazer データへ取り込む Windows コマンドラインツールです。lazer の beatmap parser、Realm model、file store を再利用し、取り込み時には NTFS hard link を要求します。
 
-> Unofficial project. It is not affiliated with, endorsed by, or supported by
-> ppy Pty Ltd or osu!.
+> 非公式プロジェクトです。ppy Pty Ltd または osu! とは提携・承認・サポート関係にありません。
 
-## Usage
+## 使い方
 
-Close osu!lazer completely, back up its data directory, then run:
+osu!lazer を完全に終了し、データフォルダをバックアップしてから実行してください。
 
 ```powershell
 .\osu-stable-to-lazer.exe "C:\Users\<username>\AppData\Local\osu!\Songs\123 Artist - Title"
 ```
 
-If automatic data-directory discovery is unsuitable, specify it explicitly:
+自動検出される lazer データフォルダが適切でない場合は、明示的に指定します。
 
 ```powershell
 .\osu-stable-to-lazer.exe "C:\Users\<username>\AppData\Local\osu!\Songs\123 Artist - Title" --lazer-data "C:\Users\<username>\AppData\Roaming\osu"
 ```
 
-The source and lazer data directories must be on the same writable NTFS volume.
-The tool refuses to run while the release or Debug lazer IPC endpoint is active.
+### 新規 beatmap set の自動監視
 
-## Build
+`watch.ps1` は stable の `Songs` フォルダ直下で新規ディレクトリが作成されたことを検知し、5 秒待機してからそのフォルダを importer へ渡します。既存の Songs 全体を走査しません。
+
+1. `dotnet build -c Release -warnaserror` を実行します。
+2. `watch.ps1` の `$SongsPath` を自分の stable `Songs` フォルダへ変更します。
+3. lazer を完全に終了した状態で、リポジトリ直下から実行します。
+
+```powershell
+.\watch.ps1
+```
+
+停止するには `Ctrl+C` を押します。lazer が起動中、書き込みが 5 秒以内に完了しない場合、または import が失敗した場合は、watch script は自動再試行しません。終了コードを確認して、lazer を閉じた後に対象フォルダを手動で再実行してください。
+
+stable の Songs フォルダと lazer のデータフォルダは、同じ書き込み可能な NTFS ボリューム上に置く必要があります。release または Debug の lazer IPC endpoint が起動している間は、ツールは実行を拒否します。
+
+## ビルド
 
 ```powershell
 dotnet build -c Release -warnaserror
 ```
 
-The dependency versions are deliberately pinned. Update all `ppy.osu.Game*`
-packages together and validate against the corresponding lazer release before
-using a new version with real user data.
+依存 package のバージョンは意図的に固定されています。`ppy.osu.Game*` package はすべて同時に更新し、実ユーザーデータで使う前に対応する lazer release との互換性を検証してください。
 
-## Distribution
+## 配布
 
-This repository distributes source code only. It does not distribute compiled
-executables, `dotnet publish` output, or restored NuGet runtime packages. Build
-the tool locally; NuGet retrieves its dependencies during restore.
+このリポジトリで配布するのは source code のみです。コンパイル済み executable、`dotnet publish` の出力、復元済み NuGet runtime package は配布しません。各自で local build を行い、NuGet が restore 時に依存関係を取得します。
 
-Do not redistribute compiled output or use it commercially without independently
-reviewing every dependency's licence terms. In particular, lazer game resources
-have separate non-commercial and font licence requirements; see the third-party
-notices below.
+コンパイル済み出力を再配布したり、商用利用したりする前に、すべての依存関係の licence 条件を個別に確認してください。特に lazer game resources には非商用および font の licence 条件があります。詳細は下記の第三者通知を参照してください。
 
-## Licensing and trademarks
+## ライセンスと商標
 
-The project-authored source code is licensed under the [MIT License](LICENSE).
-That licence does not grant rights to third-party packages or assets. See
-[third-party notices](THIRD_PARTY_NOTICES.md) for osu!lazer attribution and
-dependency obligations. `osu!`, `osu`, `lazer`, and ppy branding belong to ppy
-Pty Ltd; this repository is not an official project.
+このプロジェクトが作成した source code は [MIT License](LICENSE) で提供します。この licence は third-party package や asset の利用権を与えるものではありません。osu!lazer の帰属表示と依存関係の義務については [第三者通知](THIRD_PARTY_NOTICES.md) を参照してください。`osu!`、`osu`、`lazer`、ppy の branding は ppy Pty Ltd に帰属し、このリポジトリは公式プロジェクトではありません。
