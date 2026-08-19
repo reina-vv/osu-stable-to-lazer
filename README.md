@@ -4,6 +4,22 @@ osu!stableに取り込まれたmapsetを、osu!lazerに同時にハードリン�
 
 > これは非公式プロジェクトであり、ppy Pty Ltd, osu! に認められたものではありません。
 
+## ダウンロード
+
+`THIRD_PARTY_NOTICES.md`に記載があるように、
+ライセンス上の問題からソースのみの公開となっています。
+
+各自でビルドを行ってください。
+
+## ビルド
+
+```powershell
+dotnet build -c Release -warnaserror
+```
+
+依存する `ppy.osu.Game*` のバージョンは意図的に固定されています。
+実ユーザーデータで使う前に、現行のosu!lazerとの互換性を確認してください。
+
 ## 使い方
 
 osu!lazer を完全に終了してから開始してください。
@@ -24,7 +40,7 @@ lazerのインストール位置を変更している場合は、明示的に指
 
 1. `dotnet build -c Release -warnaserror` を実行します。
 2. `watch.ps1` の `$SongsPath` を自分の stable `Songs` フォルダへ変更します。
-3. lazer を完全に終了した状態で、`watch.ps1`を`osu-stable-to-lazer.exe`実行します。
+3. lazer を完全に終了した状態で、`watch.ps1`を`osu-stable-to-lazer.exe`と同一のディレクトリに配置し、実行します。
 
 ```powershell
 .\watch.ps1
@@ -38,24 +54,7 @@ lazerが起動中の場合、stableの書き込みが5秒以内に完了しな�
 
 終了コードを確認して、対象フォルダを手動で再実行してください。
 
-
-stable の Songs フォルダと lazer のデータフォルダは、同じ書き込み可能な NTFS ボリューム上に置く必要があります。
-
-## ビルド
-
-```powershell
-dotnet build -c Release -warnaserror
-```
-
-依存する `ppy.osu.Game*` のバージョンは意図的に固定されています。
-package はすべて同時に更新し、実ユーザーデータで使う前に対応する lazer release との互換性を検証してください。
-
-## 配布
-
-`THIRD_PARTY_NOTICES.md`に記載があるように、
-ライセンス上の問題からソースのみの公開となっています。
-
-各自で local build を行ってください。
+stableのSongsフォルダと、lazerのデータフォルダは同じ NTFS ボリューム上に置く必要があります。
 
 ## ライセンスと商標
 
