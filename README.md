@@ -6,7 +6,6 @@ osu!stableに取り込まれたmapsetを、osu!lazerに同時にハードリン�
 
 ## ダウンロード
 
-`THIRD_PARTY_NOTICES.md`に記載があるように、
 ライセンス上の問題からソースのみの公開となっています。
 
 各自でビルドを行ってください。
@@ -19,6 +18,7 @@ osu!stableに取り込まれたmapsetを、osu!lazerに同時にハードリン�
 - `watch.ps1` を使う場合は Windows PowerShell 5.1 以降または PowerShell 7
 
 `dotnet --info` で .NET 8 SDK が表示されることを確認してください。
+
 ## ビルド
 
 ```powershell
