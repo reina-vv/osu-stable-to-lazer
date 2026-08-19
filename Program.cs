@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2026 osu-stable-to-lazer contributors. Licensed under the MIT License.
+// Copyright (c) 2026 osu-stable-to-lazer contributors. Licensed under the MIT License.
 // See the LICENSE file in the repository root for full license text.
 
 using System;
@@ -19,6 +19,8 @@ namespace OsuStableToLazer;
 internal static class Program
 {
     private const string lazer_data_option = "--lazer-data";
+
+    private static readonly string[] lazer_ipc_pipe_names = { "osu-lazer", "osu-lazer-debug" };
 
     public static async Task<int> Main(string[] args)
     {
@@ -142,10 +144,20 @@ internal static class Program
         }
     }
 
-    private static bool isLazerRunning()
+    private static bool isLazerRunning() => lazer_ipc_pipe_names.Any(isIpcPipeBound);
+
+    private static bool isIpcPipeBound(string pipeName)
     {
-        string[] names = { "osu", "osu!" };
-        return names.SelectMany(Process.GetProcessesByName).Any(p => p.Id != Environment.ProcessId);
+        try
+        {
+            using var ipcProvider = new NamedPipeIpcProvider(pipeName);
+            return !ipcProvider.Bind();
+        }
+        catch
+        {
+            // A failed probe must not permit an import against a potentially active database.
+            return true;
+        }
     }
 
     private static bool canCreateHardLinks(string sourceDirectory, string destinationDirectory)

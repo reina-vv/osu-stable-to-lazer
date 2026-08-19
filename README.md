@@ -22,7 +22,7 @@ If automatic data-directory discovery is unsuitable, specify it explicitly:
 ```
 
 The source and lazer data directories must be on the same writable NTFS volume.
-The tool refuses to run when an `osu` or `osu!` process is detected.
+The tool refuses to run while the release or Debug lazer IPC endpoint is active.
 
 ## Build
 
